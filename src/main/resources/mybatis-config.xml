@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis配置文件 -->
+
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+
+		<!-- 开启驼峰命名   即数据库中的S_ID可以与resultType中配置的JavaBean中的sId绑定 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+
+
+		<setting name="cacheEnabled" value="false" />
+		<setting name="logImpl" value="LOG4J2" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+
+
+		<!-- 关闭积极加载,也就是设置为按需要加载 -->
+		<!-- <setting name="aggressiveLazyLoading" value="false" /> -->
+	</settings>
+
+	<plugins>
+		<plugin interceptor="gss.common.mybatis.plus.PaginationInterceptor"></plugin>
+	</plugins>
+</configuration>

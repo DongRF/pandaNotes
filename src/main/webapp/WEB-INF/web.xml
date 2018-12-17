@@ -4,4 +4,27 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+
+  <!-- spring mvc 配置-->
+  <!-- 定义前端控制器 -->
+  <servlet>
+    <servlet-name>spring-mvc</servlet-name>
+    <!-- 下面这个类主要负责调度 -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 指定路径 -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <!-- 启动顺序，让这个Servlet随spring一起启动 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>spring-mvc</servlet-name>
+    <!-- 会拦截指定结尾的请求。 -->
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
