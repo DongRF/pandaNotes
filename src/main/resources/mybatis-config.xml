@@ -6,23 +6,35 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <!-- mybatis配置文件 -->
 
 <configuration>
-	<settings>
-		<setting name="lazyLoadingEnabled" value="true" />
 
+    <!-- 全局设置 -->
+	<settings>
+		<!-- 延迟加载，提高性能 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 代理 -->
+		<setting name="proxyFactory" value="CGLIB"></setting>
 		<!-- 开启驼峰命名   即数据库中的S_ID可以与resultType中配置的JavaBean中的sId绑定 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
-
-
+		<!-- 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存 -->
 		<setting name="cacheEnabled" value="false" />
-		<setting name="logImpl" value="LOG4J2" />
+		<!-- 日志打印 -->
+		<!--<setting name="logImpl" value="LOG4J2" />-->
+		<!-- mybatis insert空值报空值异常，设置jdbcTypeForNull来消除异常 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
-
-
-		<!-- 关闭积极加载,也就是设置为按需要加载 -->
-		<!-- <setting name="aggressiveLazyLoading" value="false" /> -->
+		<!-- 驱动等待数据库响应的秒数 -->
+		<setting name="defaultStatementTimeout" value="3000"></setting>
 	</settings>
 
-	<plugins>
-		<plugin interceptor="gss.common.mybatis.plus.PaginationInterceptor"></plugin>
-	</plugins>
+    <!-- 加入插件 -->
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 将RowBounds第一个参数offset当成pageNum页码使用和startPage中的pageNum效果一样 -->
+            <property name="offsetAsPageNum" value="true"/>
+            <!-- 使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者ROwRounds.limit=0就会查询出全部的结果 -->
+            <property name="pageSizeZero" value="true"/>
+        </plugin>
+    </plugins>
 </configuration>

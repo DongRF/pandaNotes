@@ -6,6 +6,17 @@
   <display-name>Archetype Created Web Application</display-name>
 
 
+  <!-- 配置适配器spring -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
   <!-- spring mvc 配置-->
   <!-- 定义前端控制器 -->
   <servlet>
@@ -15,7 +26,7 @@
     <!-- 指定路径 -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-mvc.xml</param-value>
+      <param-value>classpath:/spring-mvc.xml</param-value>
     </init-param>
     <!-- 启动顺序，让这个Servlet随spring一起启动 -->
     <load-on-startup>1</load-on-startup>
