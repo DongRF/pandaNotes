@@ -8,7 +8,7 @@
     </head>
     <body>
 
-    <script src="resource/vue.js/vue.js"></script>
+    <script src="resources/vue.js/vue.js"></script>
 
 
     <div id="app">

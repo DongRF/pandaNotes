@@ -3,7 +3,7 @@
 
 
 <mapper namespace="com.dongrf.pandaNotes.functionalModule.login.DAO.LoginDAO">
-    <select id="getPassword" resultType="com.dongrf.pandaNotes.functionalModule.login.JavaBean.UserBean" parameterType="string">
-        select user_name,password from user_information t where t.USER_NAME = #{userName}
+    <select id="getPassword" resultType="com.dongrf.pandaNotes.functionalModule.login.JavaBean.UserBean" parameterType="String">
+        select user_name,password from user t where t.USER_NAME = #{userName}
     </select>
 </mapper>
