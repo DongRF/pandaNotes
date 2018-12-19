@@ -25,6 +25,7 @@ public class LoginAction {
         UserBean userBean = loginService.getPassword(a);
         System.out.println("密码 = " +userBean.getPassword());
         mav.addObject("data",userBean.getPassword());
+        mav.setViewName("mainPage");
         return mav;
     }
 }

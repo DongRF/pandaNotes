@@ -20,7 +20,8 @@
     <!-- 配置数据库连接池 c3p0 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/pandaNotesDB"></property>
+        <!-- 高版本的sql驱动需要在连接地址后面加上 serverTimezone=GMT 否则sql返回的时间和系统的时间不一致，导致报错 -->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/pandaNotesDB?serverTimezone=GMT"></property>
         <property name="user" value="root"></property>
         <property name="password" value="123456"></property>
         <property name="minPoolSize" value="2"></property>
