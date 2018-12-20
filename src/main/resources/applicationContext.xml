@@ -50,14 +50,14 @@
          *是个通配符，代表所有的文件，**代表所有目录下 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath:/${namespace}/function/**/*.xml</value>
+                <value>classpath:/${namespace}/code/**/*.xml</value>
             </list>
         </property>
     </bean>
 
     <!-- 扫描生成所有dao层 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.dongrf.pandaNotes.functionalModule.login.DAO"></property>
+        <property name="basePackage" value="com.dongrf.pandaNotes.code.DAO"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 

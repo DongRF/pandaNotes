@@ -1,10 +1,8 @@
-package com.dongrf.pandaNotes.functionalModule.login.Action;
+package com.dongrf.pandaNotes.code.Action;
 
-import com.dongrf.pandaNotes.functionalModule.login.JavaBean.UserBean;
-import com.dongrf.pandaNotes.functionalModule.login.Service.LoginService;
-import com.dongrf.pandaNotes.functionalModule.login.Service.LoginServiceImpl;
+import com.dongrf.pandaNotes.code.Service.LoginService;
+import com.dongrf.pandaNotes.code.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,9 +19,13 @@ public class LoginAction {
     public ModelAndView doLogin(@RequestParam String a){
         ModelAndView mav = new ModelAndView();
 
-        System.out.println("用户名 = "+ a);
-        UserBean userBean = loginService.getPassword(a);
-        System.out.println("密码 = " +userBean.getPassword());
+        System.out.println("用户名1 = "+ a);
+        User userBean = loginService.getPassword(a);
+
+
+        System.out.println("密码2 = " +userBean.getPassword());
+        System.out.println("用户名2 = "+ userBean.getUserName());
+
         mav.addObject("data",userBean.getPassword());
         mav.setViewName("mainPage");
         return mav;

@@ -1,6 +1,6 @@
-package com.dongrf.pandaNotes.functionalModule.login.JavaBean;
+package com.dongrf.pandaNotes.code.Entity;
 
-public class UserBean {
+public class User {
     private String userName;
     private String password;
 

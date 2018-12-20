@@ -1,7 +1,8 @@
-package com.dongrf.pandaNotes.functionalModule.login.Service;
+package com.dongrf.pandaNotes.code.Service.ServiceImpl;
 
-import com.dongrf.pandaNotes.functionalModule.login.DAO.LoginDAO;
-import com.dongrf.pandaNotes.functionalModule.login.JavaBean.UserBean;
+import com.dongrf.pandaNotes.code.Entity.User;
+import com.dongrf.pandaNotes.code.DAO.LoginDAO;
+import com.dongrf.pandaNotes.code.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginDAO loginDAO;
     @Override
-    public UserBean getPassword(String userName){
+    public User getPassword(String userName){
         return loginDAO.getPassword(userName);
     }
 }
