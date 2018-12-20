@@ -3,8 +3,8 @@
 
 
 <mapper namespace="com.dongrf.pandaNotes.code.DAO.LoginDAO">
-    <select id="getPassword" resultType="com.dongrf.pandaNotes.code.Entity.User"
-            parameterType="String">
+<select id="getPassword" resultType="com.dongrf.pandaNotes.code.Entity.User"
+        parameterType="String">
         select user_name,password from user t where t.USER_NAME = #{userName}
     </select>
 </mapper>
