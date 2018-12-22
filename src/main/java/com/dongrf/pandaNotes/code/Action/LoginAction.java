@@ -4,6 +4,7 @@ import com.dongrf.pandaNotes.code.Service.LoginService;
 import com.dongrf.pandaNotes.code.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +16,13 @@ public class LoginAction {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value="doLogin",method = RequestMethod.GET)
-    public ModelAndView doLogin(@RequestParam String a){
+    @RequestMapping(value="doLogin",method = RequestMethod.POST,consumes = "application/json")
+    public ModelAndView doLogin(User user){
         ModelAndView mav = new ModelAndView();
-
+        String a = user.getUserName();
+        String b = user.getPassword();
         System.out.println("用户名1 = "+ a);
+        System.out.println("b=" + b);
         User userBean = loginService.getPassword(a);
 
 
