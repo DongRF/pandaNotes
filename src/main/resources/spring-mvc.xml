@@ -14,15 +14,6 @@
     <!-- 让扫描spring扫描这个包下所有的类，让标注spring注解的类生效 -->
     <context:component-scan base-package="com.dongrf.pandaNotes.code"></context:component-scan>
 
-    <!--&lt;!&ndash; 默认的注解映射的支持 &ndash;&gt;&lt;!&ndash; 解决@ResponseBody中文乱码 &ndash;&gt;-->
-    <!--<mvc:annotation-driven>-->
-        <!--<mvc:message-converters>-->
-            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
-                <!--<constructor-arg value="UTF-8" />-->
-            <!--</bean>-->
-        <!--</mvc:message-converters>-->
-    <!--</mvc:annotation-driven>-->
-
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 前缀 -->

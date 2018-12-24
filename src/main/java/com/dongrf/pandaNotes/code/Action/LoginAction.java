@@ -16,13 +16,14 @@ public class LoginAction {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value="doLogin",method = RequestMethod.POST,consumes = "application/json")
-    public ModelAndView doLogin(User user){
+    @RequestMapping(value="doLogin",method = RequestMethod.POST)
+    public ModelAndView doLogin(@RequestBody User user){
         ModelAndView mav = new ModelAndView();
         String a = user.getUserName();
         String b = user.getPassword();
-        System.out.println("用户名1 = "+ a);
+        System.out.println("用户名11 = "+ a);
         System.out.println("b=" + b);
+
         User userBean = loginService.getPassword(a);
 
 

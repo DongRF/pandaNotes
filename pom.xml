@@ -93,8 +93,13 @@
       <version>3.2.5</version>
     </dependency>
 
-
-
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <!-- 解析json  如果不加，前端传递json到后台接受参数@Requestbody会报错 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.5</version>
+    </dependency>
 
 
   </dependencies>

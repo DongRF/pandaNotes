@@ -29,12 +29,12 @@
                             url: '/loginAction/doLogin.do',
                             type: 'post',
                             async: true,
-                            contentType:'application/json;charset=utf-8',
-                            dataType:'json',
-                            data: {
+                            contentType: 'application/json;charset=utf-8',
+                            dataType: 'json',
+                            data: JSON.stringify({  //从一个对象中解析出字符串
                                 userName: '123',
                                 password: '123'
-                            },
+                            }),
                             success:function(result){
                                 console.log(result);
                             },
