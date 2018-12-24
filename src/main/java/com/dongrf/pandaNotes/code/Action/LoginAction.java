@@ -4,34 +4,47 @@ import com.dongrf.pandaNotes.code.Service.LoginService;
 import com.dongrf.pandaNotes.code.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * @ 类名：LoginAction
+ * @ 作者：Mr_DongRF
+ * @ 日期：2018/12/24 21:20
+ * @ 功能：登录Action
+ * @ Version：1.0
+ */
 @Controller
 @RequestMapping("loginAction")
 public class LoginAction {
     @Autowired
     LoginService loginService;
 
+    @ResponseBody
     @RequestMapping(value="doLogin",method = RequestMethod.POST)
     public ModelAndView doLogin(@RequestBody User user){
+        /**
+         * @ 方法名：doLogin
+         * @ params: [user]
+         * @ return: org.springframework.web.servlet.ModelAndView
+         * @ 作者：Mr_DongRF
+         * @ 日期：2018/12/24
+         * @ 功能：
+         */
         ModelAndView mav = new ModelAndView();
-        String a = user.getUserName();
-        String b = user.getPassword();
-        System.out.println("用户名11 = "+ a);
-        System.out.println("b=" + b);
+        String userName = user.getUserName();
+        String password = user.getPassword();
 
-        User userBean = loginService.getPassword(a);
+        Boolean result = loginService.doLogin(userName,password);
 
+        System.out.println("登录成功？？ = "+result);
 
-        System.out.println("密码2 = " +userBean.getPassword());
-        System.out.println("用户名2 = "+ userBean.getUserName());
-
-        mav.addObject("data",userBean.getPassword());
-        mav.setViewName("mainPage");
-        return mav;
+        mav.addObject("result",result);
+        if(result){
+            mav.setViewName("mainPage");
+            return mav;
+        }else{
+            return mav;
+        }
     }
 }

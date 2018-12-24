@@ -9,7 +9,6 @@
     <body>
 
     <script src="resources/vue.js/vue.js"></script> <!-- 引入Vue.js -->
-    <script src="resources/vue.js/axios.min.js"></script> <!-- 引入axios插件，发送ajax请求 -->
     <script src="resources/jQuery/jquery-3.3.1.min.js"></script> <!-- 引入jQuery -->
     <script>
         window.onload=function(){
@@ -18,7 +17,6 @@
                 data:{
                     userName: '',
                     password:'',
-
 
                     prompt_username: '用户名/邮箱/手机号',
                     prompt_password: '密码',
