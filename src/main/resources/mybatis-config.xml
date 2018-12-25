@@ -17,8 +17,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存 -->
 		<setting name="cacheEnabled" value="false" />
-		<!--&lt;!&ndash; 日志打印 &ndash;&gt;-->
-		<!--<setting name="logImpl" value="LOG4J2" />-->
+		<!-- 日志打印（打印配置在log4j2.xml） -->
+		<setting name="logImpl" value="LOG4J2" />
 		<!-- mybatis insert空值报空值异常，设置jdbcTypeForNull来消除异常 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
 		<!-- 驱动等待数据库响应的秒数 -->

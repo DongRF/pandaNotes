@@ -17,6 +17,7 @@
         <property name="jdbcUrl" value="jdbc:mysql://123.206.84.225:3306/pandaNotesDB?serverTimezone=GMT"></property>
         <property name="user" value="root"></property>
         <property name="password" value="123456"></property>
+
         <property name="minPoolSize" value="2"></property>
         <property name="maxPoolSize" value="15"></property>
         <!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3-->
@@ -34,10 +35,11 @@
     <!-- 使用注解来控制事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 
-    <!-- 配置mybatis -->
+    <!-- 配置mybatis的sqlsession工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 绑定c3p0  -->
         <property name="dataSource" ref="dataSource"></property>
+        <!-- 加载mybatis-config.xml文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <!-- 当mybatis的xml文件和mapper接口不在相同包下时，需要用mapperLocations属性指定xml文件的路径。
          *是个通配符，代表所有的文件，**代表所有目录下 -->

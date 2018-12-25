@@ -24,7 +24,7 @@
                 methods:{
                     doLogin(){
                         $.ajax({
-                            url: '/loginAction/doLogin.do',
+                            url: 'loginAction/doLogin.do',
                             type: 'post',
                             async: true,
                             contentType: 'application/json;charset=utf-8',
