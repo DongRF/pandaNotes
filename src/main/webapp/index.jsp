@@ -8,8 +8,9 @@
     </head>
     <body>
 
-    <script src="resources/vue.js/vue.js"></script> <!-- 引入Vue.js -->
-    <script src="resources/jQuery/jquery-3.3.1.min.js"></script> <!-- 引入jQuery -->
+    <script src="resources/vue/vue.js"></script> <!-- 引入Vue.js -->
+    <script src="resources/vue/vue-resource.js"></script>
+
     <script>
         window.onload=function(){
             var vm = new Vue({
@@ -18,28 +19,23 @@
                     userName: '',
                     password:'',
 
-                    prompt_username: '用户名/邮箱/手机号',
-                    prompt_password: '密码',
+                    promptUsername: '用户名/邮箱/手机号',
+                    promptPassword: '密码',
                 },
                 methods:{
                     doLogin(){
-                        $.ajax({
-                            url: 'loginAction/doLogin.do',
-                            type: 'post',
-                            async: true,
-                            contentType: 'application/json;charset=utf-8',
-                            dataType: 'json',
-                            data: JSON.stringify({  //从一个对象中解析出字符串
-                                userName: '123',
-                                password: '123'
-                            }),
-                            success:function(result){
-                                console.log(result);
-                            },
-                            error:function(err){
-                                console.log(err);
-                            }
+                        this.$http.get('/loginAction/doLoginTest.do').then(response => {
+                            this.userName = response.userName;
+                            this.password = response.password;
+                        },response => {
+
                         });
+
+                        // this.$http.post('/loginAction/doLogin.do',data,{emulateJSON:true}).then(response => {
+                        //     console.log("成功"+response);
+                        // },response => {
+                        //     console.log("失败"+response);
+                        // });
                     }
                 }
             });
@@ -49,9 +45,9 @@
 
 
     <div id="LoginPanel">
-        <input type="text" v-model:value="userName" :placeholder="prompt_username"/>
+        <input type="text" v-model:value="userName" :placeholder="promptUsername"/>
         <br/>
-        <input type="password" v-model:value="password" :placeholder="prompt_password"/>
+        <input type="password" v-model:value="password" :placeholder="promptPassword"/>
         <br/>
         <input type="button" value="登 录" @click="doLogin">
     </div>

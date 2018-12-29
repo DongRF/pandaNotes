@@ -22,7 +22,7 @@ public class LoginAction {
 
     @ResponseBody
     @RequestMapping(value="doLogin",method = RequestMethod.POST)
-    public ModelAndView doLogin(@RequestBody User user){
+    public ModelAndView doLogin(@RequestBody User user) {
         /**
          * @ 方法名：doLogin
          * @ params: [user]
@@ -35,16 +35,25 @@ public class LoginAction {
         String userName = user.getUserName();
         String password = user.getPassword();
 
-        Boolean result = loginService.doLogin(userName,password);
+        Boolean result = loginService.doLogin(userName, password);
 
-        System.out.println("登录成功？？ = "+result);
+        System.out.println("登录成功？？ = " + result);
 
-        mav.addObject("result",result);
-        if(result){
+        mav.addObject("result", result);
+        if (result) {
             mav.setViewName("mainPage");
             return mav;
-        }else{
+        } else {
             return mav;
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value="doLoginTest",method = RequestMethod.GET)
+    public User doLoginTest(){
+        User user = new User();
+        user.setUserName("张三");
+        user.setPassword("123");
+        return user;
     }
 }
