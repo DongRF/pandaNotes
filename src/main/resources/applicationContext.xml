@@ -14,7 +14,16 @@
     <!-- spring配置文件 -->
 
     <!-- 加载数据库配置文件 -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="propertyConfigurer"
+          class="com.dongrf.pandaNotes.code.util.EncrypPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
 
     <!-- 配置数据库连接池 c3p0 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">

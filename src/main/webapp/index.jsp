@@ -13,8 +13,8 @@
 
     <script>
         window.onload=function(){
-            var vm = new Vue({
-                el:'#LoginPanel',
+            const vm = new Vue({
+                el:'#LoginDiv',
                 data:{
                     userName: '',
                     password:'',
@@ -24,18 +24,19 @@
                 },
                 methods:{
                     doLogin(){
-                        this.$http.get('/loginAction/doLoginTest.do').then(response => {
-                            this.userName = response.userName;
-                            this.password = response.password;
+                        this.$http.post('loginAction/doLogin.do',{userName: this.userName,password: this.password},{emulateJSON: true}).then(response => {
+                            let flag = response.body.flag;
+                            if(flag === "1"){
+                                alert("登录成功");
+                                alert(response.body.url);
+                            }else{
+                                alert("登录失败");
+                            }
+                            console.log("url = " + response.data.url);
+                            console.log("url = " + response.body.url);
                         },response => {
-
+                            alert("请求失败");
                         });
-
-                        // this.$http.post('/loginAction/doLogin.do',data,{emulateJSON:true}).then(response => {
-                        //     console.log("成功"+response);
-                        // },response => {
-                        //     console.log("失败"+response);
-                        // });
                     }
                 }
             });
@@ -44,7 +45,7 @@
 
 
 
-    <div id="LoginPanel">
+    <div id="LoginDiv">
         <input type="text" v-model:value="userName" :placeholder="promptUsername"/>
         <br/>
         <input type="password" v-model:value="password" :placeholder="promptPassword"/>

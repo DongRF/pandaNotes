@@ -12,6 +12,12 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class MD5 {
 
+    public static void main(String[] args){
+        String text = "123";
+        String key = "123pandaNotes";
+        System.out.println(md5(text,key));
+    }
+
     public static String md5(String text, String key){
         /**
          * @ 方法名：md5

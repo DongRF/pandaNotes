@@ -1,8 +1,7 @@
 package com.dongrf.pandaNotes.code.Service.ServiceImpl;
 
-import com.dongrf.pandaNotes.code.Entity.User;
 import com.dongrf.pandaNotes.code.DAO.LoginDAO;
-import com.dongrf.pandaNotes.code.Service.LoginService;
+import com.dongrf.pandaNotes.code.Service.ILoginService;
 import com.dongrf.pandaNotes.code.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @ Version：1.0
  */
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginService implements ILoginService {
     @Autowired
     private LoginDAO loginDAO;
     @Override
