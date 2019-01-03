@@ -3,6 +3,8 @@ package com.dongrf.pandaNotes.code.DAO;
 import com.dongrf.pandaNotes.code.Entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @ 接口名：LoginDAO
  * @ 作者：Mr_DongRF
@@ -11,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @ Version：1.0
  */
 public interface LoginDAO {
-    User doLogin(@Param("userName")String userName);
+    List<User> doLogin(@Param("userName") String userName);
 }

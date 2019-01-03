@@ -34,10 +34,7 @@ public class LoginAction {
          * @ 日期：2018/12/24
          * @ 功能：登录
          */
-        String userName = user.getUserName();
-        String password = user.getPassword();
-
-        Boolean result = loginService.doLogin(userName, password);
+        Boolean result = loginService.doLogin(user);
 
         Map<String,String> map = new HashMap<>();
 
