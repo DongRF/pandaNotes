@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @ Version：1.0
  */
 @Controller
-@RequestMapping("jumpInterface")
-public class JumpInterface {
+@RequestMapping("jumpInterfaceAction")
+public class JumpInterfaceAction {
     @RequestMapping(value="jumpPage",method = RequestMethod.GET)
     public ModelAndView JumpRegisterPage(String pageName){
         ModelAndView mav = new ModelAndView();
