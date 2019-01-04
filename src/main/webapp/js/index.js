@@ -9,7 +9,8 @@ window.onload=function(){
             description:'',
             promptUsername: '用户名/邮箱/手机号',
             promptPassword: '密码',
-            show:false
+            show:false,
+            single:true,
         },
         methods:{
             doLogin(){
@@ -23,7 +24,6 @@ window.onload=function(){
                         this.show = true;
                     }
                 },response => {
-                    alert("请求失败");
                     this.description = "网络或服务器故障，请稍后重试";
                     this.show = true;
                 });
