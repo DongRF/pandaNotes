@@ -11,10 +11,13 @@ window.onload=function(){
             promptPassword: '密码',
             show:false,
             single:true,
+            loading:false,
+            length: 40
         },
         methods:{
             doLogin(){
                 this.show = false;
+                this.loading = true;
                 this.$http.post('loginAction/doLogin.do',{userName: this.userName,password: this.password}).then(response => {
                     let flag = response.body.flag;
                     if(flag === "1"){
@@ -22,10 +25,12 @@ window.onload=function(){
                     }else{
                         this.description = response.body.description;
                         this.show = true;
+                        this.loading = false;
                     }
                 },response => {
                     this.description = "网络或服务器故障，请稍后重试";
                     this.show = true;
+                    this.loading = false;
                 });
             },
             hideDescription(){

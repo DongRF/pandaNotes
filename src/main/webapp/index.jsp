@@ -13,11 +13,14 @@
         <script src="resources/vue/vue-resource.js"></script><!-- 引入vue-resource.js -->
 
         <!-- 从本地引入iview会导致一些组件无法显示，不知道为什么，所以只能在网站引入 -->
-        <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css"> <!-- 引入iview.css样式 -->
-        <script src="//unpkg.com/iview/dist/iview.min.js"></script><!-- 引入iview.min.js -->
+        <%--<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css"> <!-- 引入iview.css样式 -->--%>
+        <%--<script src="//unpkg.com/iview/dist/iview.min.js"></script><!-- 引入iview.min.js -->--%>
+
+        <link rel="stylesheet" href="resources/iview/iview.css">
+        <script src="resources/iview/iview.min.js"></script>
 
         <link rel="stylesheet" href="css/index.css">  <!-- 引入当前界面的css样式 -->
-
+        <script src="js/index.js"></script> <!-- 引入当前界面的js -->
 
 
     </head>
@@ -34,21 +37,25 @@
                         <br/>
                         <!-- transition和animated.css定义一个简单的动画效果 -->
                         <transition enter-active-class="animated shake" leave-active-class="animated shake" :duration="{ enter:400, leave:0 }">
-                            <p v-if="show"><span style="font-size: 15px;font-weight:bold; color: red;">{{ description }}</span></p>
+                            <p v-show="show"><span style="font-size: 15px;font-weight:bold; color: red;">{{ description }}</span></p>
                         </transition>
-                            <p v-if="!show"><span style="font-size: 15px;">&nbsp;</span></p>
-                        <i-input type="text" clearable autofocus maxlength=40 v-model:value="userName" size="large" prefix="ios-contact" :placeholder="promptUsername" style="width: 55%;" @on-focus="hideDescription"></i-input>
+                            <p v-show="!show"><span style="font-size: 15px;">&nbsp;</span></p>
+                        <i-input type="text" clearable autofocus :maxlength="length" v-model:value="userName" size="large" prefix="ios-contact" :placeholder="promptUsername" style="width: 55%;" @on-focus="hideDescription"></i-input>
                         <%--<input type="text" v-model:value="userName" :placeholder="promptUsername" @click="hideDescription"/>--%>
                         <br/><br/>
                         <%--<input type="password" v-model:value="password" :placeholder="promptPassword" @click="hideDescription"/>--%>
-                        <i-input type="password" clearable maxlength=40 v-model:value="password" size="large" prefix="ios-unlock" :placeholder="promptPassword" style="width: 55%;" @on-focus="hideDescription"></i-input>
+                        <i-input type="password" clearable :maxlength="length" v-model:value="password" size="large" prefix="ios-unlock" :placeholder="promptPassword" style="width: 55%;" @on-focus="hideDescription"></i-input>
                         <br/>
                         <div style="margin: 10px 22.5% 20px 22.5%">
                             <Checkbox v-model:value="single" on-change="single=!single" style="float: left;margin-left:5px;">记住我</Checkbox>
                             <span style="float: right;margin-right:5px;"><Icon type="ios-help-circle" size=14></Icon><a href="#"> 忘记密码</a></span>
                         </div>
                         <br/>
-                        <i-button type="primary" size="large" icon="md-contact" @click="doLogin" style="width: 55%">登 录</i-button>
+                        <%--<i-button type="primary" size="large" icon="md-contact" @click="doLogin" style="width: 55%">登 录</i-button>--%>
+                        <i-button type="primary" size="large" :loading="loading" icon="md-contact" @click="doLogin" style="width: 55%">
+                            <span v-if="!loading">登 录</span>
+                            <span v-else>正在登录...</span>
+                        </i-button>
                         <br/>
                         <div style="margin: 10px 0 0 22.5%">
                             <span style="float: left;">还没账号？<a href="jumpInterfaceAction/jumpPage.do?pageName=registerPage">立即注册</a></span>
@@ -60,6 +67,5 @@
         </div>
     </div>
 
-    <script src="js/index.js"></script> <!-- 引入当前界面的js -->
     </body>
 </html>

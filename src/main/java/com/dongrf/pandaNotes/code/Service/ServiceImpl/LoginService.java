@@ -33,6 +33,11 @@ public class LoginService implements ILoginService {
         boolean result = false;
         String truePassword = "";
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            result = false;
+        }
         List<User> list = loginDAO.doLogin(user.getUserName());
 
         if(list.size()>0){
@@ -44,9 +49,6 @@ public class LoginService implements ILoginService {
                 result = MD5.verify(user.getPassword(),user.getUserName()+"pandaNotes",truePassword);
             }
         }
-
-
-
         return result;
     }
 }

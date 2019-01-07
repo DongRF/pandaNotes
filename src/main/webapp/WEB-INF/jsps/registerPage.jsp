@@ -9,8 +9,157 @@
 <html>
 <head>
     <title>欢迎加入熊猫笔记</title>
+
+    <link rel="stylesheet" href="../../resources/animate/animate.css"> <!-- 引入Animate.css样式 -->
+
+    <script src="../../resources/vue/vue.js"></script> <!-- 引入vue.js -->
+    <script src="../../resources/vue/vue-resource.js"></script><!-- 引入vue-resource.js -->
+    <script src="../../resources/vue/vuex.js"></script><!-- 引入vuex.js -->
+
+    <!-- 从本地引入iview会导致一些组件无法显示，不知道为什么，所以只能在网站引入 -->
+    <%--<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css"> <!-- 引入iview.css样式 -->--%>
+    <%--<script src="//unpkg.com/iview/dist/iview.min.js"></script><!-- 引入iview.min.js -->--%>
+
+    <link rel="stylesheet" href="../../resources/iview/iview.css">
+    <script src="../../resources/iview/iview.min.js"></script>
+
+
+
 </head>
 <body>
-<h3>注册界面</h3>
+    <div id="mainDiv">
+        <div id="panelDiv">
+
+                <Layout>
+                    <Header style="width:100%; height: 20%;background-color: #ffffff;">
+                        <div style="position: relative; top: 70%;">
+                            <Steps :current="mainCurrent" style="width: 100%;height: 30%; padding-left: 10%;">
+                                <Step title="绑定邮箱" content="填写常用的邮箱地址"></Step>
+                                <Step title="用户名/密码" content="设置用户名和密码"></Step>
+                                <Step title="可选信息" content="后续可在“个人中心”修改"></Step>
+                                <Step title="完成注册" content="欢迎加入熊猫家庭"></Step>
+                            </Steps>
+                        </div>
+                    </Header>
+                    <Content style="width:100%; height: 40%;background-color: #ffffff">
+
+                        <transition>
+                            <component :is="mainComName"></component>
+                        </transition>
+
+                    </Content>
+                    <Footer style="width:100%; height: 40%;background-color: #ffad33">
+
+                    </Footer>
+                </Layout>
+
+        </div>
+    </div>
+
+    <template id="bindEmail">
+        <div style="margin-left: 5%;margin-top: 3%">
+            <table border="0" width="50%">
+                <tr style="height: 50px;">
+                    <td align="right" width="30%">
+                        <span>邮箱地址&nbsp;&nbsp;</span>
+                    </td>
+                    <td width="70%">
+                        <i-input v-model="email" icon="ios-mail-outline" size="large" style="width: 100%" @on-change="validateEmail" :maxlength="lengthForEmail" placeholder="填写常用的邮箱地址"></i-input>
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td align="right">
+                        <span>验证码&nbsp;&nbsp;</span>
+                    </td>
+                    <td>
+                        <i-input v-model="code" icon="ios-key-outline" size="large" style="width: 75%" @on-change="validateEmail" :maxlength="lengthForCode" placeholder="6位验证码"></i-input>
+                        <i-button type="primary" :loading="waiting" @click="sendVerificationCode" :disabled="disable" style="width: 24%">
+                            <span v-if="!waiting">{{ description }}</span>
+                            <span v-else>{{ count }}秒后重试</span>
+                        </i-button>
+                    </td>
+                </tr>
+                <tr style="height: 60px">
+                    <td></td>
+                    <td>
+                        <Checkbox v-model:value="agree">同意<a href="#">《熊猫笔记隐私和服务协议》</a></Checkbox>
+                    </td>
+                </tr>
+                <tr style="height: 40px">
+                    <td></td>
+                    <td>
+                        <i-button type="primary" @click="nextPage()" size="large" style="width: 50%">下一步，用户名/密码</i-button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="#"><span style="font-size: small">注册遇到问题？</span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+    <template id="usernameAndPassword">
+        <div>
+            <table border="0" width="50%">
+                <tr style="height: 50px;">
+                    <td align="right" width="30%">
+                        <span>用户名&nbsp;&nbsp;</span>
+                    </td>
+                    <td width="70%">
+                        <i-input v-model="username" icon="ios-contact-outline" size="large" style="width: 100%" @on-change="validateEmail" maxlength=50 placeholder="建议使用邮箱地址作为用户名"></i-input>
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td align="right">
+                        <span>密码&nbsp;&nbsp;</span>
+                    </td>
+                    <td>
+                        <i-input v-model="code" icon="ios-key-outline" size="large" style="width: 75%" @on-change="validateEmail" maxlength=6 placeholder="6位验证码"></i-input>
+                        <i-button type="primary" :loading="waiting" @click="sendVerificationCode" :disabled="disable" style="width: 24%">
+                            <span v-if="!waiting">{{ description }}</span>
+                            <span v-else>{{ count }}秒后重试</span>
+                        </i-button>
+                    </td>
+                </tr>
+                <tr style="height: 60px">
+                    <td></td>
+                    <td>
+                        <Checkbox :value="agree">同意<a href="#">《熊猫笔记隐私和服务协议》</a></Checkbox>
+                    </td>
+                </tr>
+                <tr style="height: 40px">
+                    <td></td>
+                    <td>
+                        <i-button type="primary" @click="nextPage()" size="large" style="width: 50%">下一步，用户名/密码</i-button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="#"><span style="font-size: small">注册遇到问题？</span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+    <template id="optionalInformation">
+        <div>
+            <h3>可选信息</h3>
+        </div>
+    </template>
+
+    <template id="finish">
+        <div>
+            <h3>完成</h3>
+        </div>
+    </template>
+
+
+    <link rel="stylesheet" href="../../css/registerPage.css">  <!-- 引入当前界面的css样式 -->
+    <script src="../../js/registerPage.js"></script> <!-- 引入当前界面的js -->
 </body>
 </html>
