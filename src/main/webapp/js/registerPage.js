@@ -58,7 +58,7 @@ const vm = new Vue({
                 sendVerificationCode(){     //发送验证码
                     this.waiting = true;
                     this.countTime();
-                    //生成验证码并发送
+                    //生成验证码并发送（未解决）
 
                 },
                 countTime(){    //倒计时
@@ -93,6 +93,10 @@ const vm = new Vue({
                         agree: this.agree,
                         code: this.code
                     });
+
+                    //与下面的nextPage没解决。这个nextPage调用下面的nextPage。
+                    //即组件之间的方法调用没解决
+
                     //this.$emit('nextpage',this.childcurrent);   //子组件向父组件传值
                 }
             }
