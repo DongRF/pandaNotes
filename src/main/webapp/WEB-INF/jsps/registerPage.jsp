@@ -15,10 +15,8 @@
     <script src="../../resources/vue/vue.js"></script> <!-- 引入vue.js -->
     <script src="../../resources/vue/vue-resource.js"></script><!-- 引入vue-resource.js -->
     <script src="../../resources/vue/vuex.js"></script><!-- 引入vuex.js -->
+    <script src="../../resources/vue/vue-router.js"></script><!-- 引入vue-router.js -->
 
-    <!-- 从本地引入iview会导致一些组件无法显示，不知道为什么，所以只能在网站引入 -->
-    <%--<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css"> <!-- 引入iview.css样式 -->--%>
-    <%--<script src="//unpkg.com/iview/dist/iview.min.js"></script><!-- 引入iview.min.js -->--%>
 
     <link rel="stylesheet" href="../../resources/iview/iview.css">
     <script src="../../resources/iview/iview.min.js"></script>
@@ -43,7 +41,7 @@
             <Content style="width:100%; height: 40%;background-color: #ffffff">
 
                 <transition>
-                    <component :is="comName"></component>
+                    <component :is="comName" ref="usernameandpassword"></component>
                 </transition>
 
             </Content>
@@ -109,14 +107,14 @@
 
 <%--填写用户名和密码的组件--%>
 <template id="usernameAndPassword">
-    <div>
+    <div style="margin-left: 5%;margin-top: 3%">
         <table border="0" width="50%">
             <tr style="height: 50px;">
                 <td align="right" width="30%">
                     <span>用户名&nbsp;&nbsp;</span>
                 </td>
                 <td width="70%">
-                    <i-input v-model="username" icon="ios-contact-outline" size="large" style="width: 100%" @on-change="" :maxlength="lengthForUserAndPassword" placeholder="建议使用邮箱地址作为用户名"></i-input>
+                    <i-input v-model="username" icon="ios-contact-outline" size="large" style="width: 100%" @on-change="" :maxlength="40" placeholder="建议使用邮箱地址作为用户名"></i-input>
                 </td>
             </tr>
             <tr style="height: 50px">
@@ -124,7 +122,7 @@
                     <span>密码&nbsp;&nbsp;</span>
                 </td>
                 <td>
-                    <i-input type="password" v-model="password" icon="ios-key-outline" size="large" style="width: 100%" @on-change="" :maxlength="lengthForUserAndPassword" placeholder="不低于8位的字母、数字以及特殊符号的密码组合"></i-input>
+                    <i-input type="password" v-model="password" icon="ios-key-outline" size="large" style="width: 100%" @on-change="" :maxlength="40" placeholder="不低于8位的字母、数字以及特殊符号的密码组合"></i-input>
                 </td>
             </tr>
             <tr style="height: 50px">
@@ -132,11 +130,11 @@
                     <span>重复密码&nbsp;&nbsp;</span>
                 </td>
                 <td>
-                    <i-input type="password" v-model="rePassword" icon="ios-key-outline" size="large" style="width: 100%" @on-change="" :maxlength="lengthForUserAndPassword" placeholder="重复输入的密码"></i-input>
+                    <i-input type="password" v-model="rePassword" icon="ios-key-outline" size="large" style="width: 100%" @on-change="" :maxlength="40" placeholder="重复输入的密码"></i-input>
                 </td>
             </tr>
             <tr style="height: 40px">
-                <td><p> {{ username }} </p></td>
+                <td></td>
                 <td>
                     <i-button type="primary" @click="nextPage()" size="large" style="width: 50%">下一步，可选信息</i-button>
                 </td>
@@ -156,8 +154,82 @@
 
 <%--填写可选信息的组件--%>
 <template id="optionalInformation">
-    <div>
-        <h3>可选信息</h3>
+    <div style="margin-left: 5%;margin-top: 3%">
+        <table border="0" width="50%">
+            <tr style="height: 50px;">
+                <td align="right" width="30%">
+                    <span>昵称&nbsp;&nbsp;</span>
+                </td>
+                <td width="70%" colspan="4">
+                    <i-input v-model="nickName" icon="ios-contact-outline" size="large" style="width: 100%" :maxlength="50" placeholder="昵称不是一个代号，而是一种信仰"></i-input>
+                </td>
+            </tr>
+            <tr style="height: 50px">
+                <td align="right">
+                    <span>真实姓名&nbsp;&nbsp;</span>
+                </td>
+                <td width="15%" align="right">姓：</td>
+                <td>
+                    <i-input v-model="firstName" icon="ios-key-outline" size="large" style="width: 100%" :maxlength="2"></i-input>
+                </td>
+                <td width="15%" align="right">名：</td>
+                <td>
+                    <i-input v-model="secondName" icon="ios-key-outline" size="large" style="width: 100%" :maxlength="3"></i-input>
+                </td>
+            </tr>
+            <tr style="height: 50px;">
+                <td align="right">
+                    <span>性别&nbsp;&nbsp;</span>
+                </td>
+                <td colspan="4">
+                    <Radio-group v-model="gender">
+                        <Radio label="1">
+                            <Icon size="20" type="ios-man"></Icon>
+                            <span style="font-size: 15px">男</span>
+                        </Radio>
+                        &nbsp;&nbsp;&nbsp;
+                        <Radio label="0">
+                            <Icon size="20" type="ios-woman"></Icon>
+                            <span style="font-size: 15px">女</span>
+                        </Radio>
+                        &nbsp;&nbsp;&nbsp;
+                        <Radio label="-1">
+                            <Icon size="20" type="md-glasses"></Icon>
+                            <span style="font-size: 15px">保密</span>
+                        </Radio>
+                    </Radio-group>
+                </td>
+            </tr>
+            <tr style="height: 50px;">
+                <td align="right">
+                    <span>生日&nbsp;&nbsp;</span>
+                </td>
+                <td colspan="4">
+                    <Date-picker :value="birthday" size="large" format=" yyyy-MM-dd" type="date" placeholder="请选择日期" style="width: 50%"></Date-picker>
+                </td>
+            </tr>
+            <tr style="height: 50px;">
+                <td align="right">
+                    <span>地区&nbsp;&nbsp;</span>
+                </td>
+                <td colspan="4">
+                    <Cascader :data="city" v-model="defaultCity" size="large" style="width: 50%"></Cascader>
+                </td>
+            </tr>
+            <tr style="height: 50px;">
+                <td align="right">
+                </td>
+                <td colspan="4">
+                    <i-button type="primary" @click="nextPage()" size="large" style="width: 50%">下一步，完成注册</i-button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4">
+                    <a href="#"><span style="font-size: small">注册遇到问题？</span></a>
+                </td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -173,6 +245,7 @@
 
 
 <link rel="stylesheet" href="../../css/registerPage.css">  <!-- 引入当前界面的css样式 -->
+<script src="../../resources/city.js"></script>
 <script src="../../js/registerPage.js"></script> <!-- 引入当前界面的js -->
 </body>
 </html>
